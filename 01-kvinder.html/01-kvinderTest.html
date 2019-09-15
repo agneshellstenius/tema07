@@ -1,0 +1,101 @@
+<body>
+    <template>
+        <article>
+            <h2></h2>
+            <p id="github"></p>
+            <img src="" alt="">
+            <p id="alder"></p>
+        </article>
+    </template>
+    <section id="liste"></section>
+    <script>
+        let elever;
+        const dest = document.querySelector("#liste");
+        const temp = document.querySelector("template");
+
+        document.addEventListener("DOMContentLoaded", getJson);
+
+        async function getJson() {
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/1Xge7slZ9dEOTCn1Yxl3OE4xgvrXOL8Y_iu3WN1yGB1U/od6/public/values?alt=json");
+            elever = await jsonData.json();
+            console.log(elever);
+            visElever();
+        }
+
+
+        function visElever() {
+            elever.feed.entry.forEach((elev) => {
+                const klon = temp.cloneNode(true).content;
+
+                klon.querySelector("h2").textContent = elev.gsx$navn.$t;
+                klon.querySelector("img").src = elev.gsx$billede.$t;
+                klon.querySelector("#github").textContent = elev.gsx$github.$t;
+                klon.querySelector("#alder").textContent = elev.gsx$alder.$t;
+
+                dest.appendChild(klon);
+            })
+        }
+
+        //Filter Knapper
+        /*<button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter" data-køn="k">Kvinder</button>
+        <button class="filter" data-køn="andet">Andet</button> */
+
+        /*Function visPersoner() {
+               dest.innerHTML = "";
+               personer.feed.entry.forEach(person => ) {
+                       if (filter == "alle"
+                           II filter == person.gsx$.$t) {
+                           const theClone = theTemplatePointer.cloneNode(true).content;
+                           theClone.querySelector("h2").textContent = person.gsx$navn.$t;
+                           theClone.querySelector(".billede").src = person.gsx$billede.$t;
+                           theClone.querySelector(".billede").src = person.gsx$billede.$t;
+                           theClone.querySelector(".billede").src = person.gsx$billede.$t;
+                           theClone.querySelector(".github").href = `http://github.com/${person.gs
+               theClone.querySelector(".github").textContent =`http://github.com/${
+               dest.appendChild(theClone);*/
+        }
+
+        }
+        })
+        }
+        }
+
+
+        /*eventlistntere på alle knapper//
+         Function addEventListenerToButtons() {
+             document.querySelectorAll(".filter").forEach(elm => ) {
+                 elm.addEventListener("click", filtrering);*/
+
+        //eventhandler
+
+        function filtrering() {
+
+            filter = this.dataset.køn; //sett filter-variablen lig med værdien af data-køn-attributen for den valgte knap- Når det er en data attribut kan den tilgås direkte i JS med dataset. Data-noget i html bliver til dataset.noge i JS
+            visPersoner(); //kald visPersoner igjen
+
+        }
+
+        }
+
+        }
+
+
+
+
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>
